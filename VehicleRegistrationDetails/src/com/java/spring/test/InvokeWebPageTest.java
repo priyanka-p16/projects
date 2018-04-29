@@ -23,11 +23,11 @@ public class InvokeWebPageTest {
 	{
 		try {
 			System.out.println("Invoking the webpage");
-			VehicleType[] type = null;
+			VehicleType[] vehType = null;
 			for(String fileName: csvFile)
 			{
 				if(fileName.equals(Constants.FILE_NAME)) {
-					type = ReadVehicleDetails.ReadVehicleRegDetails(fileName);
+					vehType = ReadVehicleDetails.ReadVehicleRegDetails(fileName);
 					System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_PATH);
 					WebDriver driver = new ChromeDriver();
 					driver.manage().deleteAllCookies();
@@ -36,22 +36,22 @@ public class InvokeWebPageTest {
 					driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 					driver.get(Constants.GOV_URL);
 					driver.findElement(By.className("pub-c-button")).click(); // Click on Start now button
-					if(null!=type && type.length>1) { // if there are more than one vehicle in the file
-						for(int i=0;i<type.length;i++) {
+					if(null!=vehType && vehType.length>=1) { // if there are more than one vehicle in the file
+						for(int i=0;i<vehType.length;i++) {
 							Thread.sleep(500);// page wait
-							driver.findElement(By.className("form-control")).sendKeys(type[i].getRegNo()); // Enter the vehicle registration number
+							driver.findElement(By.className("form-control")).sendKeys(vehType[i].getRegNo()); // Enter the vehicle registration number
 							Thread.sleep(500);// page wait
 							driver.findElement(By.className("button")).click(); // click on continue button
 							WebElement model = driver.findElement(By.xpath("//*[@id=\"pr3\"]/div/ul/li[2]/span[2]/strong")); // make of the vehicle value in the page
 							String make = model.getText();
 							System.out.println("Vehicle Model from webpage: "+make);
-							System.out.println("Vehicle Model from CSV file: "+type[i].getModel());
-							Assert.assertEquals(make, type[i].getModel());
+							System.out.println("Vehicle Model from CSV file: "+vehType[i].getModel());
+							Assert.assertEquals(make, vehType[i].getModel());
 							WebElement color = driver.findElement(By.xpath("//*[@id=\"pr3\"]/div/ul/li[3]/span[2]/strong")); // color of the vehicle value in the page
 							String vehicleColor = color.getText();
 							System.out.println("Vehicle Color from webpage :"+vehicleColor);
-							System.out.println("Vehicle Color from CSV file :"+type[i].getColor());
-							Assert.assertEquals(vehicleColor, type[i].getColor());
+							System.out.println("Vehicle Color from CSV file :"+vehType[i].getColor());
+							Assert.assertEquals(vehicleColor, vehType[i].getColor());
 							Thread.sleep(900);
 							driver.findElement(By.className("back-to-previous")).click();	// click on back link to check for next vehicle details				
 						}

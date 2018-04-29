@@ -31,7 +31,7 @@ public class GetFileDetailsImplTest {
 	/*
 	 * Method to test the retrieved file details
 	 */
-	private static void TestElements(List<FileDetails> filesList) {
+	private void TestElements(List<FileDetails> filesList) {
 		FileDetails[] details = new FileDetails[filesList.size()];
 		filesList.toArray(details);
 		Assert.assertEquals(Constants.PNG_FILE_EXTN,details[0].getFileExtension());
