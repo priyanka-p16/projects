@@ -53,9 +53,11 @@ public class InvokeWebPageTest {
 							System.out.println("Vehicle Color from CSV file :"+vehType[i].getColor());
 							Assert.assertEquals(vehicleColor, vehType[i].getColor());
 							Thread.sleep(900);
-							driver.findElement(By.className("back-to-previous")).click();	// click on back link to check for next vehicle details				
+							//driver.findElement(By.className("back-to-previous")).click();	// click on back link to check for next vehicle details				
+						    driver.findElement(By.linkText("Back")).click();
 						}
 					}
+					driver.quit();
 				}
 			}
 		} 
