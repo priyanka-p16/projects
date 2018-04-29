@@ -38,9 +38,9 @@ public class InvokeWebPageTest {
 					driver.findElement(By.className("pub-c-button")).click(); // Click on Start now button
 					if(null!=vehType && vehType.length>=1) { // if there are more than one vehicle in the file
 						for(int i=0;i<vehType.length;i++) {
-							Thread.sleep(500);// page wait
+							Thread.sleep(900);// page wait
 							driver.findElement(By.className("form-control")).sendKeys(vehType[i].getRegNo()); // Enter the vehicle registration number
-							Thread.sleep(500);// page wait
+							Thread.sleep(900);// page wait
 							driver.findElement(By.className("button")).click(); // click on continue button
 							WebElement model = driver.findElement(By.xpath("//*[@id=\"pr3\"]/div/ul/li[2]/span[2]/strong")); // make of the vehicle value in the page
 							String make = model.getText();
@@ -52,9 +52,8 @@ public class InvokeWebPageTest {
 							System.out.println("Vehicle Color from webpage :"+vehicleColor);
 							System.out.println("Vehicle Color from CSV file :"+vehType[i].getColor());
 							Assert.assertEquals(vehicleColor, vehType[i].getColor());
-							Thread.sleep(900);
-							//driver.findElement(By.className("back-to-previous")).click();	// click on back link to check for next vehicle details				
-						    driver.findElement(By.linkText("Back")).click();
+							Thread.sleep(2000);
+						    driver.findElement(By.linkText("Back")).click(); // click on back link to check for next vehicle details	
 						}
 					}
 					driver.quit();
