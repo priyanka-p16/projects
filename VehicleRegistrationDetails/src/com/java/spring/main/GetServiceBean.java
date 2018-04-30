@@ -22,7 +22,7 @@ public class GetServiceBean {
 		List<FileDetails> filesList = (List<FileDetails>) fileDetails[0];
 		System.out.println("Number of files retrieved: "+filesList.size());
 		List<String> csvFiles = (List<String>) fileDetails[1];
-		InvokeWebPageTest test = new InvokeWebPageTest();
+		InvokeWebPageTest test = InvokeWebPageTest.getInstanceOfInvokeWebPageTestclass();
 		test.invokeWebPage(csvFiles);
 	}	
 }
